@@ -1,3 +1,3 @@
 exports.signup = function(req, res) {
-  res.json(['hello', 'world']);
+  res.render('./../app/index.html');
 };

@@ -1,10 +1,9 @@
-var firebaseUrl = 'https://gettogether.firebaseio.com';
-angular.module('GetTogetherApp', [])
+angular.module('GetTogetherApp', ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
     controller: 'MainCtrl',
-    templateUrl: 'views/index.html'
+    templateUrl: 'views/main.html'
   })
   .when('/signup', {
     controller: 'SignupCtrl',
@@ -18,4 +17,4 @@ angular.module('GetTogetherApp', [])
     redirectTo: '/'
   });
   $locationProvider.html5Mode(true);
-})
+});
