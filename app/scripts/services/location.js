@@ -1,6 +1,5 @@
 angular.module('GetTogetherApp')
 .factory('LocationService', function($http, $q, SessionService){
-  var username = SessionService.getUser();
   var d = $q.defer();
   var service = {
     getLocation: function(map) {
@@ -15,6 +14,7 @@ angular.module('GetTogetherApp')
       return d.promise;
     },
     displayMap: function(position) {
+      var username = SessionService.getUser();
       var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       service.displayContent(service.map, pos, username);
       service.map.setCenter(pos);
@@ -27,6 +27,7 @@ angular.module('GetTogetherApp')
       });
     },
     storePosition: function(position) {
+      var username = SessionService.getUser();
       usersRef.child(username).child('position').set(position);
       console.log('Position stored in Firebase');
     }

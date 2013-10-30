@@ -8,9 +8,9 @@ angular.module('GetTogetherApp')
     getUser: function() {
       return service.currentUser;
     },
-    setUser: function(username) {
-      service.currentUser = username;
-    },
+    // setUser: function(username) {
+    //   service.currentUser = username;
+    // },
     signup: function(username, password) {
       var defer = $q.defer();
       console.log('Signup: ', username, password);
