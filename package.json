@@ -1,0 +1,10 @@
+{
+  "name": "gettogether",
+  "version": "0.0.0",
+  "dependencies": {
+    "express": "~3.2.4"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
+}
