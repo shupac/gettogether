@@ -1,13 +1,12 @@
 angular.module('GetTogetherApp')
 .factory('SessionService', function($http, $q, $location) {
-  var fbRef = new Firebase('https://gettogether.firebaseio.com');
-  var usersRef = fbRef.child('users');
-  var groupsRef = fbRef.child('groups');
   var service = {
-
     currentUser: null,
     isLoggedIn: function() {
       return !!service.currentUser;
+    },
+    getUser: function() {
+      return service.currentUser;
     },
     setUser: function(username) {
       service.currentUser = username;

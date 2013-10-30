@@ -1,11 +1,11 @@
 angular.module('GetTogetherApp')
-// .run(function($rootScope, $location, SessionService) {
-//   $rootScope.$on("$routeChangeStart", function(evt, next, current) {
-//     if (!SessionService.isLoggedIn() && next.controller !== "SignupCtrl") {
-//         $location.path('/login');
-//     }
-//   });
-// })
+.run(function($rootScope, $location, SessionService) {
+  $rootScope.$on("$routeChangeStart", function(evt, next, current) {
+    if (!SessionService.isLoggedIn() && next.controller !== "SignupCtrl") {
+        $location.path('/login');
+    }
+  });
+})
 .controller('SignupCtrl', function($scope, SessionService, $location){
   $scope.submitUser = function(username, password){
     SessionService
@@ -39,7 +39,12 @@ angular.module('GetTogetherApp')
       mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  LocationService.getLocation(map);
+  LocationService
+  .getLocation(map)
+  .then(function(position) {
+    LocationService.displayMap(position);
+    LocationService.storePosition(position);
+  }, function(){console.log('location promise error')});
 
   $scope.logout = function() {
     SessionService.logout();

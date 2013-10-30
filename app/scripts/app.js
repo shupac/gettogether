@@ -1,3 +1,7 @@
+var fbRef = new Firebase('https://gettogether.firebaseio.com');
+var usersRef = fbRef.child('users');
+var groupsRef = fbRef.child('groups');
+
 angular.module('GetTogetherApp', ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
   $routeProvider

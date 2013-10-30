@@ -1,18 +1,22 @@
 angular.module('GetTogetherApp')
-.factory('LocationService', function($http){
+.factory('LocationService', function($http, $q, SessionService){
+  var username = SessionService.getUser();
+  var d = $q.defer();
   var service = {
     getLocation: function(map) {
-      debugger;
       service.map = map;
       if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(service.displayMap);
+        navigator.geolocation.getCurrentPosition(function(position) {
+          d.resolve(position);
+        });
       } else {
         alert("Browser doesn't support Geolocation");
       }
+      return d.promise;
     },
     displayMap: function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      service.displayContent(service.map, pos, 'Here');
+      service.displayContent(service.map, pos, username);
       service.map.setCenter(pos);
     },
     displayContent: function(map, pos, content) {
@@ -21,6 +25,10 @@ angular.module('GetTogetherApp')
         position: pos,
         content: content
       });
+    },
+    storePosition: function(position) {
+      usersRef.child(username).child('position').set(position);
+      console.log('Position stored in Firebase');
     }
   };
   return service;
