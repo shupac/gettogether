@@ -14,14 +14,15 @@ angular.module('GetTogetherApp')
     signup: function(username, password) {
       var defer = $q.defer();
       console.log('Signup: ', username, password);
-      usersRef.child(username).child('password').set(password, function(error) {
-        if(error) {
-          console.log('error during signup');
-          defer.reject();
-        } else {
+      var user = usersRef.child(username);
+      user.once('value', function(user){
+        if(user.val() === null) {
           service.currentUser = username;
+          usersRef.child(username).child('password').set(password);
           defer.resolve();
-          console.log('successful signup');
+          console.log('user created');
+        } else {
+          console.log('Username already exists');
         }
       });
       return defer.promise;
@@ -29,15 +30,16 @@ angular.module('GetTogetherApp')
     login: function(username, password) {
       var defer = $q.defer();
       console.log('Login: ', username, password);
-      var user = usersRef.child(username).on('value', function(user){
+      var user = usersRef.child(username);
+      user.once('value', function(user){
         if(user.val() === null) {
-          console.log('user not found');
+          console.log('login: user not found');
           defer.reject();
         } else {
           if(user.val().password === password) {
             service.currentUser = username;
             defer.resolve(user);
-            console.log('successful login');
+            console.log('promise resolve: successful login');
           } else {
             console.log('wrong password');
             defer.reject();

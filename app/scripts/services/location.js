@@ -19,11 +19,11 @@ angular.module('GetTogetherApp')
       service.displayContent(service.map, pos, username);
       service.map.setCenter(pos);
     },
-    displayContent: function(map, pos, content) {
+    displayContent: function(map, pos, username) {
       new google.maps.InfoWindow({
         map: service.map,
         position: pos,
-        content: content
+        content: username
       });
     },
     storePosition: function(position) {

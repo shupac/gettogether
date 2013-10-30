@@ -1,5 +1,6 @@
 angular.module('GetTogetherApp')
 .run(function($rootScope, $location, SessionService) {
+  console.log('redirect');
   $rootScope.$on("$routeChangeStart", function(evt, next, current) {
     if (!SessionService.isLoggedIn() && next.controller !== "SignupCtrl") {
         $location.path('/login');
@@ -7,7 +8,8 @@ angular.module('GetTogetherApp')
   });
 })
 .controller('SignupCtrl', function($scope, SessionService, $location){
-  $scope.submitUser = function(username, password){
+  console.log('signup page');
+  $scope.signup = function(username, password){
     SessionService
     .signup(username, password)
     .then(function() {
@@ -18,12 +20,12 @@ angular.module('GetTogetherApp')
   };
 })
 .controller('LoginCtrl', function($scope, SessionService, $location){
-  $scope.user = {
-    username: 'user',
-    password: 'test'
-  };
+  // $scope.user = {
+  //   username: 'user',
+  //   password: 'test'
+  // };
 
-  $scope.submitUser = function(username, password){
+  $scope.login = function(username, password){
     SessionService
     .login(username, password)
     .then(function() {
