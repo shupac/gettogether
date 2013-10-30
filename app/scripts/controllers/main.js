@@ -18,6 +18,11 @@ angular.module('GetTogetherApp')
   };
 })
 .controller('LoginCtrl', function($scope, SessionService, $location){
+  $scope.user = {
+    username: 'user',
+    password: 'test'
+  };
+
   $scope.submitUser = function(username, password){
     SessionService
     .login(username, password)
@@ -35,25 +40,25 @@ angular.module('GetTogetherApp')
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = new google.maps.LatLng(position.coords.latitude,
-                                       position.coords.longitude);
-
-      var infowindow = new google.maps.InfoWindow({
-        map: map,
-        position: pos,
-        content: 'Location found using HTML5.'
-      });
-      debugger;
-      map.setCenter(pos);
-    }, function() {
-      handleNoGeolocation(true);
+  var getLocation = function() {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(displayMap);
+    } else {
+      alert("Browser doesn't support Geolocation");
+    }
+  };
+  var displayMap = function(position) {
+    var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    displayContent(map, pos, 'Here');
+    map.setCenter(pos);
+  };
+  var displayContent = function(map, pos, content) {
+    new google.maps.InfoWindow({
+      map: map,
+      position: pos,
+      content: content
     });
-  } else {
-    // Browser doesn't support Geolocation
-    handleNoGeolocation(false);
-  }
+  };
 
   $scope.logout = function() {
     SessionService.logout();
