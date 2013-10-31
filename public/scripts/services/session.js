@@ -58,6 +58,7 @@ angular.module('GetTogetherApp')
     },
     logout: function() {
       service.currentUserID = null;
+      usersRef.child(service.currentUsername).remove();
       $location.path('/login');
     }
   };

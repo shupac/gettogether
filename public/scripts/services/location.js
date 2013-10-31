@@ -16,10 +16,12 @@ angular.module('GetTogetherApp')
     displayMap: function(position) {
       var username = SessionService.getUsername();
       var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      service.displayContent(service.map, pos, username);
+      // service.displayContent(service.map, pos, username);
       service.map.setCenter(pos);
     },
-    displayContent: function(map, pos, username) {
+    displayContent: function(position, username) {
+      console.log(position, username);
+      var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       new google.maps.InfoWindow({
         map: service.map,
         position: pos,

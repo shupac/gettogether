@@ -33,4 +33,9 @@ angular.module('GetTogetherApp')
     LocationService.displayMap(position);
     LocationService.storePosition(position);
   }, function(){console.log('location promise error')});
+
+  usersRef.on('child_added', function(user) {
+    LocationService.displayContent(user.val().position, user.val().username);
+    console.log(user.val());
+  });
 });
