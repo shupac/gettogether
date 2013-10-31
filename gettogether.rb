@@ -29,7 +29,7 @@ ActiveRecord::Base.establish_connection(
 #   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
 #   :database => 'gettogether',
 #   :encoding => 'utf8'
-)
+# )
 
 # Handle potential connection pool timeout issues
 after do
