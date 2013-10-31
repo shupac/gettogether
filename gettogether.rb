@@ -94,8 +94,7 @@ end
 ###########################################################
 
 get "/" do
-  # redirect '/index.html'
-  'hello world'
+  redirect '/index.html'
 end
 
 get '/signup' do
