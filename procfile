@@ -1,1 +1,1 @@
-web: ruby gettogether.rb
+web: bundle exec ruby gettogether.rb -p $PORT
