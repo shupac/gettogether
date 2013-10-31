@@ -22,11 +22,20 @@ angular.module('GetTogetherApp')
     displayContent: function(position, username) {
       console.log(position, username);
       var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      new google.maps.InfoWindow({
-        map: service.map,
+      var marker = new google.maps.Marker({
+        // map: service.map,
         position: pos,
-        content: username
+        title: username
       });
+
+      var infowindow = new google.maps.InfoWindow({
+        content: marker.title
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(service.map,marker);
+      });
+      return marker;
     },
     storePosition: function(position) {
       var username = SessionService.getUsername();
