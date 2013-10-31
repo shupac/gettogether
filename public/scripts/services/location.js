@@ -28,7 +28,7 @@ angular.module('GetTogetherApp')
     },
     storePosition: function(position) {
       var username = SessionService.getUsername();
-      usersRef.child(username).child('position').set(position);
+      usersRef.child(username).set({username: username, position: position});
       console.log('Position stored in Firebase');
     }
   };
