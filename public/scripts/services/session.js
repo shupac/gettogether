@@ -4,7 +4,7 @@ angular.module('GetTogetherApp')
     currentUserID: null,
     currentUsername: null,
     isLoggedIn: function() {
-      return !!service.currentUser;
+      return !!service.currentUserID;
     },
     getUserID: function() {
       return service.currentUserID;
@@ -57,7 +57,7 @@ angular.module('GetTogetherApp')
       });
     },
     logout: function() {
-      service.currentUser = null;
+      service.currentUserID = null;
       $location.path('/login');
     }
   };

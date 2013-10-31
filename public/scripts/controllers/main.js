@@ -7,18 +7,21 @@ angular.module('GetTogetherApp')
     }
   });
 })
-.controller('SignupCtrl', function($scope, SessionService, $location){
-  console.log('signup page');
+.controller('LoginCtrl', function($scope, SessionService, $location){
+  $scope.signedIn = SessionService.isLoggedIn();
   $scope.signup = function(username, password){
     SessionService.signup(username, password);
   };
-})
-.controller('LoginCtrl', function($scope, SessionService, $location){
   $scope.login = function(username, password){
     SessionService.login(username, password);
   };
 })
 .controller('MainCtrl', function($scope, SessionService, LocationService){
+  $scope.username = SessionService.getUsername();
+  $scope.logout = function() {
+    SessionService.logout();
+  };
+
   var mapOptions = {
       zoom: 13,
       mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -30,9 +33,4 @@ angular.module('GetTogetherApp')
     LocationService.displayMap(position);
     LocationService.storePosition(position);
   }, function(){console.log('location promise error')});
-
-  $scope.logout = function() {
-    SessionService.logout();
-  };
-
 });
