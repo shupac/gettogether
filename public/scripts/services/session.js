@@ -1,52 +1,60 @@
 angular.module('GetTogetherApp')
 .factory('SessionService', function($http, $q, $location) {
   var service = {
-    currentUser: null,
+    currentUserID: null,
+    currentUsername: null,
     isLoggedIn: function() {
       return !!service.currentUser;
     },
-    getUser: function() {
-      return service.currentUser;
+    getUserID: function() {
+      return service.currentUserID;
     },
-    // setUser: function(username) {
-    //   service.currentUser = username;
-    // },
+    getUsername: function() {
+      return service.currentUsername;
+    },
+    setUserID: function(userID) {
+      service.currentUserID = userID;
+    },
+    setUsername: function(username) {
+      service.currentUsername = username;
+    },
     signup: function(username, password) {
-      var defer = $q.defer();
-      console.log('Signup: ', username, password);
-      var user = usersRef.child(username);
-      user.once('value', function(user){
-        if(user.val() === null) {
-          service.currentUser = username;
-          usersRef.child(username).child('password').set(password);
-          defer.resolve();
-          console.log('user created');
-        } else {
-          console.log('Username already exists');
-        }
-      });
-      return defer.promise;
+      service.submitCred(username, password, 'signup');
     },
     login: function(username, password) {
-      var defer = $q.defer();
-      console.log('Login: ', username, password);
-      var user = usersRef.child(username);
-      user.once('value', function(user){
-        if(user.val() === null) {
-          console.log('login: user not found');
-          defer.reject();
-        } else {
-          if(user.val().password === password) {
-            service.currentUser = username;
-            defer.resolve(user);
-            console.log('promise resolve: successful login');
-          } else {
-            console.log('wrong password');
-            defer.reject();
-          }
+      service.submitCred(username, password, 'login');
+    },
+    submitCred: function(username, password, type) {
+      var url;
+      if(type === 'login') {
+        url = '/login';
+      }
+      if(type === 'signup') {
+        url = '/signup';
+      }
+
+      console.log(type + ': ', username, password);
+      $http({
+        url: url,
+        method: 'POST',
+        data: {
+          username: username,
+          password: password
         }
+      })
+      .success(function(data) {
+        console.log(data);
+        if(data.success) {
+          service.setUserID(data.id);
+          service.setUsername(username);
+          $location.path('/');
+        } else {
+          console.log(data.message);
+        }
+      })
+      .error(function() {
+        console.log('signup')
       });
-      return defer.promise;
     },
     logout: function() {
       service.currentUser = null;

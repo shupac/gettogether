@@ -14,7 +14,7 @@ angular.module('GetTogetherApp')
       return d.promise;
     },
     displayMap: function(position) {
-      var username = SessionService.getUser();
+      var username = SessionService.getUsername();
       var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
       service.displayContent(service.map, pos, username);
       service.map.setCenter(pos);
@@ -27,7 +27,7 @@ angular.module('GetTogetherApp')
       });
     },
     storePosition: function(position) {
-      var username = SessionService.getUser();
+      var username = SessionService.getUsername();
       usersRef.child(username).child('position').set(position);
       console.log('Position stored in Firebase');
     }

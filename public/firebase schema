@@ -1,0 +1,22 @@
+/Users
+  /Username
+    /Position
+    /Rooms
+
+
+User signup
+
+1. Enter username and password
+2. Post request to /signup
+3. If successful, response should include userID
+4. Create user record in Firebase with userID
+5. Set currentUser to userID
+6. Redirect
+
+User login
+
+1. Enter username and password
+2. Post request to /login
+3. If successful, response should include userID
+4. Set currentUser to userID
+5. Redirect

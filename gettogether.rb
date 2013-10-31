@@ -70,6 +70,7 @@ post "/login" do
   data = JSON.parse(request.body.read)
   username = data['username']
   password = data['password']
+  p 'login', username, password
   user = User.find_by_username(username)
   if user != nil
     password_hash = BCrypt::Engine.hash_secret(password, user[:salt])
@@ -79,6 +80,7 @@ post "/login" do
       {success: false, message: 'Incorrect username or password'}.to_json
     end
   else
+    p 'login: user not found'
     {success: false, message: 'User not found'}.to_json
   end
 end
