@@ -1,6 +1,6 @@
 <div>
 <form ng-hide="signedIn">
-  <input type="text" name="username" ng-model="user.username" placeholder="Username">
+  <input autofocus="autofocus" type="text" name="username" ng-model="user.username" placeholder="Username">
   <input type="password" name="password" ng-model="user.password" placeholder="Password">
   <button ng-click="login(user.username, user.password)">Login</button>
   <button ng-click="signup(user.username, user.password)">Sign Up</button>

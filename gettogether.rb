@@ -14,12 +14,16 @@ require 'bcrypt'
 
 set :public_folder, File.dirname(__FILE__) + '/public'
 
-configure :development, :production do
-  ActiveRecord::Base.establish_connection(
-    :adapter => 'sqlite3',
-    :database =>  'db/dev.sqlite3.db'
-   )
-end
+db = URI.parse('postgres://user:pass@localhost/gettogether')
+
+ActiveRecord::Base.establish_connection(
+  :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+  # :host     => db.host,
+  # :username => db.user,
+  # :password => db.password,
+  :database => 'gettogether',
+  :encoding => 'utf8'
+)
 
 # Handle potential connection pool timeout issues
 after do
