@@ -15,11 +15,9 @@ GEM
     arel (3.0.2)
     backports (3.3.5)
     bcrypt-ruby (3.1.2)
-    bond (0.4.3)
     builder (3.0.4)
     coderay (1.0.9)
     daemons (1.1.9)
-    diff-lcs (1.2.4)
     eventmachine (1.0.3)
     i18n (0.6.5)
     method_source (0.8.2)
@@ -35,22 +33,6 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.1.0)
-    ripl (0.7.0)
-      bond (~> 0.4.2)
-    ripl-multi_line (0.3.1)
-      ripl (>= 0.3.6)
-    ripl-rack (0.2.0)
-      rack (>= 1.0)
-      rack-test (>= 0.5)
-      ripl (>= 0.3.5)
-    rspec (2.14.1)
-      rspec-core (~> 2.14.0)
-      rspec-expectations (~> 2.14.0)
-      rspec-mocks (~> 2.14.0)
-    rspec-core (2.14.7)
-    rspec-expectations (2.14.3)
-      diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.4)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -71,11 +53,6 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     tilt (1.4.1)
-    tux (0.3.0)
-      ripl (>= 0.3.5)
-      ripl-multi_line (>= 0.2.4)
-      ripl-rack (>= 0.2.0)
-      sinatra (>= 1.2.1)
     tzinfo (0.3.38)
 
 PLATFORMS
@@ -87,9 +64,7 @@ DEPENDENCIES
   pg
   pry
   rake
-  rspec
   sinatra
   sinatra-activerecord
   sinatra-contrib
   thin
-  tux
