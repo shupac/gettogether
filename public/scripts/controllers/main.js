@@ -38,4 +38,8 @@ angular.module('GetTogetherApp')
     LocationService.displayContent(user.val().position, user.val().username);
     console.log(user.val());
   });
+
+  usersRef.on('child_removed', function(user) {
+    // TODO remove user from DOM
+  });
 });
