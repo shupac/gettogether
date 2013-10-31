@@ -16,19 +16,19 @@ set :public_folder, File.dirname(__FILE__) + '/public'
 
 db = URI.parse('postgres://gtgztuwtqlcxzw:4HAFe2VjQShWUyy94qVQpLCGMg@ec2-54-235-152-22.compute-1.amazonaws.com:5432/dkg1uaf18h609')
 
-# ActiveRecord::Base.establish_connection(
-#   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-#   :host     => db.host,
-#   :username => db.user,
-#   :password => db.password,
-#   :database => db.path[1..-1],
-#   :encoding => 'utf8'
-# )
-
 ActiveRecord::Base.establish_connection(
   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
-  :database => 'gettogether',
+  :host     => db.host,
+  :username => db.user,
+  :password => db.password,
+  :database => db.path[1..-1],
   :encoding => 'utf8'
+)
+
+# ActiveRecord::Base.establish_connection(
+#   :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
+#   :database => 'gettogether',
+#   :encoding => 'utf8'
 )
 
 # Handle potential connection pool timeout issues
