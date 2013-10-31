@@ -1,0 +1,12 @@
+body {
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+#map-canvas {
+  width: 600px;
+  height: 400px;
+  margin: 0px;
+  padding: 0px
+}
