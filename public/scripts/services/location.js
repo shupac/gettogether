@@ -13,13 +13,13 @@ angular.module('GetTogetherApp')
       }, function(){console.log('location promise error')});
     },
     getLocation: function(map) {
-      // service.map = map;
       if(navigator.geolocation) {
         // service.watchID = navigator.geolocation.watchPosition(service.watchPosition);
-        service.watchID = navigator.geolocation.watchPosition(service.watchPosition);
+        service.watchID = navigator.geolocation.watchPosition(service.watchPosition, function(){
+          console.log('getCurrentPosition error')}, {'enableHighAccuracy':true,'timeout':5000,'maximumAge':0});
         navigator.geolocation.getCurrentPosition(function(position) {
           d.resolve(position);
-        });
+        }, function(){console.log('getCurrentPosition error')}, {'enableHighAccuracy':true,'timeout':5000,'maximumAge':0});
       } else {
         alert("Browser doesn't support Geolocation");
       }
@@ -79,6 +79,10 @@ angular.module('GetTogetherApp')
         var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         service.markers[user.val().username].setPosition(pos);
       });
+    },
+    logout: function() {
+      console.log('clearWatch', service.watchID);
+      navigator.geolocation.clearWatch(service.watchID);
     }
   };
   return service;

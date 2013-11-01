@@ -20,6 +20,7 @@ angular.module('GetTogetherApp')
   $scope.username = SessionService.getUsername();
   $scope.logout = function() {
     SessionService.logout();
+    LocationService.logout();
   };
 
   var mapOptions = {
