@@ -20,7 +20,6 @@ angular.module('GetTogetherApp')
   $scope.username = SessionService.getUsername();
   $scope.logout = function() {
     SessionService.logout();
-    clearInterval(running);
   };
 
   var mapOptions = {
@@ -29,35 +28,10 @@ angular.module('GetTogetherApp')
   };
   var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-  LocationService
-  .getLocation(map)
-  .then(function(position) {
-    LocationService.displayMap(position);
-    LocationService.storePosition(position);
-  }, function(){console.log('location promise error')});
+  // getting initial location
+  LocationService.initializeMap(map);
+  LocationService.startListeners();
 
-  var getLocation = function() {
-    console.log('running');
-    LocationService
-    .getLocation(map)
-    .then(function(position) {
-      LocationService.storePosition(position);
-    }, function(){console.log('location promise error')});
-  };
+  // 
 
-  var running = setInterval(getLocation, 5000);
-
-  usersRef.on('child_added', function(user) {
-    LocationService.displayContent(user.val().position, user.val().username).setMap(map);
-    console.log(user.val());
-  });
-
-  usersRef.on('child_removed', function(user) {
-    // TODO remove user from DOM
-    
-  });
-
-  usersRef.on('child_changed', function(user) {
-    LocationService.displayContent(user.val().position, user.val().username).setMap(map);
-  });
 });

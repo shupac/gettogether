@@ -43,7 +43,6 @@ angular.module('GetTogetherApp')
         }
       })
       .success(function(data) {
-        console.log(data);
         if(data.success) {
           service.setUserID(data.id);
           service.setUsername(username);
