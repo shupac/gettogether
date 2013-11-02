@@ -1,0 +1,24 @@
+body {
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+#map-canvas {
+  width: 320px;
+  height: 568px;
+  margin: 0px;
+  padding: 0px
+}
+
+#login {
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 200px;
+  font-size: x-large;
+}
+
+button {
+  font-size: x-large;
+}
